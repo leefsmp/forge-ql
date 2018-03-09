@@ -1,0 +1,13 @@
+body {
+  overflow: hidden;
+  height: 100vh;
+  margin: 0;
+  
+  .app {
+    height: 100vh;
+
+    main {
+      height: calc(100% - 65px);
+    }
+  }
+}

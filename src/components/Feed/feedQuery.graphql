@@ -1,0 +1,6 @@
+query FeedQuery {
+  posts {
+    title
+    _id
+  }
+}

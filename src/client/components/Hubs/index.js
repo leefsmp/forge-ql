@@ -1,37 +1,30 @@
 import { withRouter } from 'react-router-dom'
-import feedQuery from './feedQuery.graphql'
+import hubsQuery from './hubsQuery.graphql'
 import { graphql } from 'react-apollo'
 import React from 'react'
-import './feed.scss'
+import './hubs.scss'
 
-class Feed extends React.Component {
-
-  componentWillReceiveProps(nextProps) {
-    const {location} = this.props
-    if (location.key !== nextProps.location.key) {
-      this.props.feedQuery.refetch()
-    }
-  }
+class Hubs extends React.Component {
 
   render() {
 
     return (
-      <div className="feed">
+      <div className="hubs">
         <h2>
-          Posts Feed
+          Hubs
         </h2>
-        <div className="posts-list">
+        <div className="hubs-list">
         {
-          this.props.feedQuery.loading && 
+          this.props.hubsQuery.loading && 
           <div>
-            Loading posts ...
+            Loading hubs ...
           </div>
         }  
         {
-          this.props.feedQuery.posts &&
-          this.props.feedQuery.posts.map(post => (
-            <div className="post" key={post._id}> 
-              { post.title }
+          this.props.hubsQuery.hubs &&
+          this.props.hubsQuery.hubs.map(hub => (
+            <div className="post" key={hub.id}> 
+              { hub.id }
             </div>  
           ))
         }
@@ -41,18 +34,9 @@ class Feed extends React.Component {
   }
 }
 
-// <Post
-//  key={post.id}
-// post={post}
-//  refresh={() => this.props.feedQuery.refetch()}
-//  isDraft={!post.isPublished}
-///>
-
-
-export default graphql(feedQuery, {
-  // name of the injected prop: this.props.feedQuery...
-  name: 'feedQuery', 
+export default graphql(hubsQuery, {
+  name: 'hubsQuery', 
   options: {
     fetchPolicy: 'network-only',
   },
-})(withRouter(Feed))
+})(withRouter(Hubs))

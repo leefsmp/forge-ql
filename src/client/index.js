@@ -29,8 +29,6 @@ const stateLink = withClientState({
   cache 
 })
 
-console.log(`${config.apiUrl}/graphql`)
-
 const httpLink = new HttpLink({ 
   uri: `${config.apiUrl}/graphql`
 })

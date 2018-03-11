@@ -38,8 +38,6 @@ class AppNavbar extends React.Component {
 
     const user = this.props.user
 
-    console.log(user)
-
     const username = user
       ? `${user.firstName} ${user.lastName}`
       : ''

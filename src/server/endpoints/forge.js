@@ -42,8 +42,6 @@ module.exports = function (config) {
   /////////////////////////////////////////////////////////
   router.post('/login', async(req, res) => {
 
-    console.log(req.body)
-
     req.session.redirect = req.body.origin || '/'
 
     const authURL = oauth2.getAuthorizeUrl({

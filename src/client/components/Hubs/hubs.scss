@@ -1,13 +1,13 @@
-.feed {
+.hubs {
   padding: 20px;
   height: 100%;
 
-  .posts-list {
+  .hubs-list {
     height: calc(100% - 66px);
     background: whitesmoke;
     overflow: scroll;
     
-    .post {
+    .hub {
       border: 1px solid #b5b5b5;
       margin: 0 0 10px 0;
       padding: 16px;

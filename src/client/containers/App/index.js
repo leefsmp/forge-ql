@@ -10,6 +10,7 @@ import './app.scss'
 // routes
 import Home from 'containers/Home'
 import Blog from 'containers/Blog'
+import Hubs from 'containers/Hubs'
 
 class App extends React.Component {
 
@@ -53,6 +54,7 @@ class App extends React.Component {
        <AppNavbar user={this.props.user} onLogin={this.onLogin}/>
         <main>
           <Route exact path="/blog" component={Blog}/>
+          <Route exact path="/hubs" component={Hubs}/>
           <Route exact path="/" component={Home}/>
         </main>
       </div>

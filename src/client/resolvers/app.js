@@ -31,8 +31,6 @@ const login = async () => {
     
   } catch (ex) {
     
-    const url = `${config.apiUrl}/forge/login`
-
     const payload = {
       origin: window.location.href
     }
@@ -55,6 +53,31 @@ const login = async () => {
     // const loginUrl = await res.json()
 
     window.location.assign(loginUrl)
+
+    return null
+  }
+}
+
+const logout = async () => {
+
+  const clientAPI = new ClientAPI(config.apiUrl)
+
+  try {
+
+    const res = await clientAPI.ajax({
+      contentType: 'application/json',
+      url:'/forge/logout',
+      dataType: 'json',
+      type: 'POST'
+    })
+
+    console.log(res)
+
+    return res
+    
+  } catch (ex) {
+    
+    return null
   }
 }
 
@@ -101,6 +124,8 @@ const appResolver = {
 
         if (res.user) {
 
+          logout()
+
           cache.writeData({ 
             data: {
               user: null
@@ -112,16 +137,19 @@ const appResolver = {
 
         const user = await login()
 
-        cache.writeData({ 
-          data: {
-            user: {
-              __typename: 'User',
-              profileImage: user.profileImages.sizeX80,
-              firstName: user.firstName,
-              lastName: user.lastName
+        if (user) {
+
+          cache.writeData({ 
+            data: {
+              user: {
+                __typename: 'User',
+                profileImage: user.profileImages.sizeX80,
+                firstName: user.firstName,
+                lastName: user.lastName
+              }
             }
-          }
-        })
+          })
+        }
 
         return null 
       }

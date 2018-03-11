@@ -1,20 +1,62 @@
 {
-  // Use IntelliSense to learn about possible attributes.
+  // Use IntelliSense to learn about possible Node.js debug attributes.
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
+  "version": "1.0.0",
   "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "GrapghQL Server | RUN",
-      "program": "${workspaceRoot}/bin/start.js",
-      "env": {
-        "MONGO_URL": "mongodb://localhost:27017/graphql",
-        "HOST_URL": "http://localhost",
-        "NODE_ENV":"development",
-        "PORT" : "3001"
+      {
+          "type": "node",
+          "request": "launch",
+          "name": "BLD | DEV + HRM",
+          "program": "${workspaceRoot}/bin/start.js",
+          "env": {
+              "MONGO_URL": "mongodb://localhost:27017/graphql",
+              "HOST_URL": "http://localhost",
+              "NODE_ENV":"development",
+              "HOT_RELOADING":"true",
+              "PORT": "3000"
+          }
+      },
+      {
+          "type": "node",
+          "request": "launch",
+          "name": "BLD | DEV",
+          "program": "${workspaceRoot}/webpack/index.js",
+          "env": {
+              "NODE_ENV":"development"
+          }
+      },
+      {
+          "type": "node",
+          "request": "launch",
+          "name": "BLD | PROD",
+          "program": "${workspaceRoot}/webpack/index.js",
+          "env": {
+              "NODE_ENV":"production",
+              "ANALYZE_BUNDLE":"true",
+              "OPTIMIZE_IMG":"true"
+          }
+      },
+      {
+          "type": "node",
+          "request": "launch",
+          "name": "RUN | DEV",
+          "program": "${workspaceRoot}/bin/start.js",
+          "env": {
+              "NODE_ENV":"development",
+              "PORT":"3000"
+          }
+      },
+      {
+          "type": "node",
+          "request": "launch",
+          "name": "RUN | PROD (static)",
+          "program": "${workspaceRoot}/bin/start.js",
+          "env": {
+              "NODE_ENV":"production",
+              "PORT":"3001",
+              "SERVE_STATIC":"true"
+          }
       }
-    }
   ]
 }

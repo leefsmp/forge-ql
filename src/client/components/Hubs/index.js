@@ -1,11 +1,15 @@
-import { Link } from 'react-router-dom'
 import hubsQuery from './hubsQuery.graphql'
+import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import React from 'react'
 import './hubs.scss'
 
 class Hubs extends React.Component {
 
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
   displayHubName (hubAttributes) {
 
     switch (hubAttributes.extension.type) {
@@ -24,17 +28,25 @@ class Hubs extends React.Component {
     }
   }
 
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
   renderHub (hub) {
     
     return (
       <div className="hub" key={hub.id}> 
-        <Link to={`/hub?id=${hub.id}`}>
+        <Link to={`/hub?hubId=${hub.id}`}>
         { this.displayHubName(hub.attributes) }
         </Link>
       </div>  
     )
   }
 
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
   render() {
 
     return (
@@ -51,7 +63,7 @@ class Hubs extends React.Component {
         }  
         {
           this.props.hubsQuery.hubs &&
-          this.props.hubsQuery.hubs.map(hub => (
+          this.props.hubsQuery.hubs.data.map(hub => (
             this.renderHub (hub)
           ))
         }

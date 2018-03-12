@@ -1,12 +1,22 @@
 const typeDefs = [`
 
     type Query {
-      folderContent(projectId: String!, folderId: String!): [FolderObject]
-      topFolders(hubId: String!, projectId: String!): [Folder]
-      project(hubId: String!, projectId: String!): Project
-      projects(hubId: String!): [Project]
-      hub(hubId: String!): Hub
-      hubs: [Hub]
+      folderContent (projectId: String!, folderId: String!): [FolderObject]
+      topFolders (hubId: String!, projectId: String!): [Folder]
+      project (hubId: String!, projectId: String!): Project
+      projects (hubId: String!): [Project]
+      hub (hubId: String!): HubResponse
+      hubs: HubsResponse
+    }
+
+    type HubsResponse {
+      error: String
+      data: [Hub]
+    }
+
+    type HubResponse {
+      error: String
+      data: Hub
     }
 
     type Hub {

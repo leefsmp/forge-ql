@@ -1,11 +1,14 @@
-query HubQuery($hubId: String!) {
-  hub(hubId: $hubId) {
-    attributes {
-      extension {
-        type
+query HubQuery ($hubId: String!) {
+  hub (hubId: $hubId) {
+    data {
+      attributes {
+        extension {
+          type
+        }
+        name
       }
-      name
+      id
     }
-    id
+    error
   }
 }

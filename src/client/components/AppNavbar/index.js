@@ -75,11 +75,6 @@ class AppNavbar extends React.Component {
                 </NavItem>
               </LinkContainer>
             }
-            <NavItem eventKey={1.3} href={`${config.apiUrl}/graphiql`} target="_blank">
-              <label className="nav-label">
-                &nbsp; GraphQL IDE
-              </label>
-            </NavItem>
           </Nav>
           
           <Nav pullRight>
@@ -96,7 +91,12 @@ class AppNavbar extends React.Component {
                 &nbsp; { user ? username : 'Login'}
               </label>
             </NavItem>
-            <NavItem eventKey={2.2} onClick={this.onAbout}>
+            <NavItem eventKey={2.3} href={`${config.apiUrl}/graphiql`} target="_blank">
+              <label className="nav-label">
+                &nbsp; GraphQL IDE
+              </label>
+            </NavItem>
+            <NavItem eventKey={2.3} onClick={this.onAbout}>
               <label className="nav-label">
                 &nbsp; About ...
               </label>

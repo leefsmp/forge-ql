@@ -1,5 +1,5 @@
-import { Link, withRouter } from 'react-router-dom'
 import hubQuery from './hubQuery.graphql'
+import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import React from 'react'
 import './hub.scss'
@@ -8,14 +8,12 @@ class Hub extends React.Component {
 
   render() {
 
-    console.log(this.props.hubQuery)
-
     return (
       <div className="hub-details">
         <div className="title">
           Hub: {
-            !this.props.hubQuery.loading && 
-            this.props.hubQuery.hub.attributes.name
+            this.props.hubQuery.hub && 
+            this.props.hubQuery.hub.data.attributes.name
           }
         </div>
         <div className="content">
@@ -33,11 +31,13 @@ class Hub extends React.Component {
 
 export default graphql(hubQuery, {
   name: 'hubQuery',
-  options: props => ({
-    variables: {
-      hubId: 'HUBID1' //props.match.params.id
+  options: props => {
+    return {
+      variables: {
+        hubId: props.hubId
+      }
     }
-  })
-})(withRouter(Hub))
+  }
+})(Hub)
 
 

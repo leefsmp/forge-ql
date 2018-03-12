@@ -5,6 +5,42 @@ import typeDefs from './typeDefs'
 
 import hubsRes from './hubs'
 
+///////////////////////////////////////////////////////////
+//
+//
+///////////////////////////////////////////////////////////
+const onError = (ex) => {
+
+  return {
+    data: null,
+    error: ex
+  }
+}
+
+///////////////////////////////////////////////////////////
+//
+//
+///////////////////////////////////////////////////////////
+const onResponse = (res) => {
+
+  if (res.statusCode === 200) {
+
+    return {
+      data: res.body.data,
+      error: null
+    }
+  }
+
+  return {
+    data: null,
+    error: {}
+  }
+}
+
+///////////////////////////////////////////////////////////
+//
+//
+///////////////////////////////////////////////////////////
 const api = () => {
 
   const forgeSvc = ServiceManager.getService('ForgeSvc')
@@ -13,33 +49,43 @@ const api = () => {
 
   const resolvers = {
     Query: {
-      hubs: async (root, args, ctx) => {
-        
-        return hubsRes.body.data
+      hubs: async (root, args, {session}) => {
+   
+        try {
 
-        // try {
+          const token = 
+            await forgeSvc.get3LeggedTokenMaster(
+              session)
 
-        //   const token = 
-        //     await forgeSvc.get3LeggedTokenMaster(
-        //       ctx.session)
+          const res = await dmSvc.getHubs(token)
 
-        //   const res = await dmSvc.getHubs(token)
+          return onResponse (res)
 
-        //   const hubs = res.body.data
+        } catch (ex) {
 
-        //   return hubs
-
-        // } catch (ex) {
-
-        //   console.log(ex)
-        //   return []
-        // }
+          return onError(ex)
+        }
       },
-      hub: async (root, {hubId}) => {
+      hub: async (root, {hubId}, {session}) => {
 
-        return hubsRes.body.data[0]
+        try {
+
+          const token = 
+            await forgeSvc.get3LeggedTokenMaster(
+              session)
+
+          const res = await dmSvc.getHub(token, hubId)
+
+          return onResponse(res)
+
+        } catch (ex) {
+
+          console.log(ex)      
+
+          return {}
+        }
       },
-      projects: async (root, {hubId}) => {
+      projects: async (root, {hubId}, {session}) => {
 
        
       }

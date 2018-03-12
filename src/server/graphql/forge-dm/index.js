@@ -3,6 +3,8 @@ import {graphqlExpress} from 'graphql-server-express'
 import {makeExecutableSchema} from 'graphql-tools'
 import typeDefs from './typeDefs'
 
+import hubsRes from './hubs'
+
 const api = () => {
 
   const forgeSvc = ServiceManager.getService('ForgeSvc')
@@ -13,23 +15,33 @@ const api = () => {
     Query: {
       hubs: async (root, args, ctx) => {
         
-        try {
+        return hubsRes.body.data
 
-          const token = 
-            await forgeSvc.get3LeggedTokenMaster(
-              ctx.session)
+        // try {
 
-          const res = await dmSvc.getHubs(token)
+        //   const token = 
+        //     await forgeSvc.get3LeggedTokenMaster(
+        //       ctx.session)
 
-          const hubs = res.body.data
+        //   const res = await dmSvc.getHubs(token)
 
-          return hubs
+        //   const hubs = res.body.data
 
-        } catch (ex) {
+        //   return hubs
 
-          console.log(ex)
-          return []
-        }
+        // } catch (ex) {
+
+        //   console.log(ex)
+        //   return []
+        // }
+      },
+      hub: async (root, {hubId}) => {
+
+        return hubsRes.body.data[0]
+      },
+      projects: async (root, {hubId}) => {
+
+       
       }
     }
   }

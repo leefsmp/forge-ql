@@ -30,7 +30,8 @@ const stateLink = withClientState({
 })
 
 const httpLink = new HttpLink({ 
-  uri: `${config.apiUrl}/graphql`
+  uri: `${config.apiUrl}/graphql`,
+  credentials: 'include'
 })
 
 const link = ApolloLink.from([

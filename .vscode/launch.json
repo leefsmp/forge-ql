@@ -10,7 +10,7 @@
           "name": "BLD | DEV + HRM",
           "program": "${workspaceRoot}/bin/start.js",
           "env": {
-              "MONGO_URL": "mongodb://localhost:27017/graphql",
+              "MONGO_URL": "mongodb://localhost:27017/forge-ql",
               "HOST_URL": "http://localhost",
               "NODE_ENV":"development",
               "HOT_RELOADING":"true",
@@ -23,7 +23,10 @@
           "name": "BLD | DEV",
           "program": "${workspaceRoot}/webpack/index.js",
           "env": {
-              "NODE_ENV":"development"
+            "MONGO_URL": "mongodb://localhost:27017/forge-ql",
+            "HOST_URL": "http://localhost",
+            "NODE_ENV":"development",
+            "PORT": "3000"
           }
       },
       {
@@ -32,9 +35,12 @@
           "name": "BLD | PROD",
           "program": "${workspaceRoot}/webpack/index.js",
           "env": {
-              "NODE_ENV":"production",
-              "ANALYZE_BUNDLE":"true",
-              "OPTIMIZE_IMG":"true"
+            "MONGO_URL": "mongodb://localhost:27017/forge-ql",
+            "HOST_URL": "http://localhost",
+            "NODE_ENV":"production",
+            "ANALYZE_BUNDLE":"true",
+            "OPTIMIZE_IMG":"true",
+            "PORT": "3000"
           }
       },
       {
@@ -43,8 +49,10 @@
           "name": "RUN | DEV",
           "program": "${workspaceRoot}/bin/start.js",
           "env": {
-              "NODE_ENV":"development",
-              "PORT":"3000"
+            "MONGO_URL": "mongodb://localhost:27017/forge-ql",
+            "HOST_URL": "http://localhost",
+            "NODE_ENV":"development",
+            "PORT": "3000"
           }
       },
       {
@@ -53,9 +61,10 @@
           "name": "RUN | PROD (static)",
           "program": "${workspaceRoot}/bin/start.js",
           "env": {
-              "NODE_ENV":"production",
-              "PORT":"3001",
-              "SERVE_STATIC":"true"
+            "MONGO_URL": "mongodb://localhost:27017/forge-ql",
+            "HOST_URL": "http://localhost",
+            "NODE_ENV":"production",
+            "PORT": "3001"
           }
       }
   ]

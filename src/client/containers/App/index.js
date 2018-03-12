@@ -1,5 +1,5 @@
+import { graphql, compose } from 'react-apollo'
 import { Route } from 'react-router-dom'
-import { graphql } from 'react-apollo'
 import AppNavbar from 'AppNavbar'
 import 'font-awesome-webpack'
 import gql from 'graphql-tag'
@@ -11,6 +11,7 @@ import './app.scss'
 import Home from 'containers/Home'
 import Blog from 'containers/Blog'
 import Hubs from 'containers/Hubs'
+import Hub from 'containers/Hub'
 
 class App extends React.Component {
 
@@ -55,6 +56,7 @@ class App extends React.Component {
         <main>
           <Route exact path="/blog" component={Blog}/>
           <Route exact path="/hubs" component={Hubs}/>
+          <Route exact path="/hub" component={Hub}/>
           <Route exact path="/" component={Home}/>
         </main>
       </div>
@@ -102,4 +104,8 @@ const withUser = graphql(gql`
   }
 })
 
-export default fetchUser(doLogin(withUser(App)))
+export default compose(
+  fetchUser,
+  withUser,
+  doLogin
+) (App)

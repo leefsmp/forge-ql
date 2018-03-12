@@ -1,4 +1,5 @@
 import { LinkContainer } from 'react-router-bootstrap'
+import {client as config} from 'c0nfig'
 import logo from './adsk-forge.png'
 import './appNavbar.scss'
 import React from 'react'
@@ -64,6 +65,21 @@ class AppNavbar extends React.Component {
                 </label>
               </NavItem>
             </LinkContainer>
+            {
+              this.props.user &&
+              <LinkContainer to={{ pathname: '/hubs', query: { } }}>
+                <NavItem eventKey={1.2}>
+                  <label className="nav-label">
+                    &nbsp; Hubs
+                  </label>
+                </NavItem>
+              </LinkContainer>
+            }
+            <NavItem eventKey={1.3} href={`${config.apiUrl}/graphiql`} target="_blank">
+              <label className="nav-label">
+                &nbsp; GraphQL IDE
+              </label>
+            </NavItem>
           </Nav>
           
           <Nav pullRight>

@@ -1,4 +1,4 @@
-{
+const res = {
 "statusCode": 200,
 "headers": {
 "content-type": "application/vnd.api+json",
@@ -184,3 +184,5 @@
 }
 }
 }
+
+export default res

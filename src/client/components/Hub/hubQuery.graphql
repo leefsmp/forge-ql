@@ -9,6 +9,8 @@ query HubQuery ($hubId: String!) {
       }
       id
     }
-    error
+    error {
+      message
+    }
   }
 }

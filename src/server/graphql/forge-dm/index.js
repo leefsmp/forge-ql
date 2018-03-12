@@ -80,14 +80,61 @@ const api = () => {
 
         } catch (ex) {
 
-          console.log(ex)      
-
-          return {}
+          return onError(ex)
         }
       },
       projects: async (root, {hubId}, {session}) => {
 
-       
+        try {
+
+          const token = 
+            await forgeSvc.get3LeggedTokenMaster(
+              session)
+
+          const res = await dmSvc.getProjects(token, hubId)
+
+          return onResponse (res)
+
+        } catch (ex) {
+
+          return onError(ex)
+        }
+      },
+      topFolders: async (root, {hubId, projectId}, {session}) => {
+
+        try {
+
+          const token = 
+            await forgeSvc.get3LeggedTokenMaster(
+              session)
+
+          const res = await await dmSvc.getProjectTopFolders(
+            token, hubId, projectId)
+
+          return onResponse (res)
+
+        } catch (ex) {
+
+          return onError(ex)
+        }
+      },
+      folderContent: async (root, {projectId, folderId}, {session}) => {
+      
+        try {
+
+          const token = 
+            await forgeSvc.get3LeggedTokenMaster(
+              session)
+
+          const res = await dmSvc.getFolderContent(
+            token, projectId, folderId)
+
+          return onResponse (res)
+
+        } catch (ex) {
+
+          return onError(ex)
+        }
       }
     }
   }

@@ -1,5 +1,5 @@
-query HubsQuery {
-  hubs {
+query ProjectsQuery ($hubId: String!) {
+  projects (hubId: $hubId) {
     data {
       attributes {
         extension {

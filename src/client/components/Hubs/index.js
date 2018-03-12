@@ -57,6 +57,7 @@ class Hubs extends React.Component {
         <div className="hubs-list">
         {
           this.props.hubsQuery.loading && 
+          !this.props.hubsQuery.hubs &&
           <div>
             Loading hubs ...
           </div>

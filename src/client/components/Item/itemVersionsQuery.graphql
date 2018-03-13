@@ -1,0 +1,24 @@
+query ItemVersions ($projectId: String!, $itemId: String!) {
+  itemVersions (projectId: $projectId, itemId: $itemId) {
+    data {
+      relationships {
+        derivatives {
+           data {
+             id
+           }
+        }
+      }
+      attributes {
+        extension {
+          type
+        }
+        displayName
+        name
+      }
+      id
+    }
+    error {
+      message
+    }
+  }
+}

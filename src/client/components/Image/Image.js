@@ -1,0 +1,80 @@
+import PropTypes from 'prop-types'
+import React from 'react'
+import './Image.scss'
+
+export default class Image extends React.Component {
+
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
+  static propTypes = {
+    className: PropTypes.string
+  }
+
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
+  static defaultProps = {
+    className: ''
+  }
+
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
+  constructor (props) {
+
+    super (props)
+
+    this.onError = this.onError.bind(this)
+    this.onLoad = this.onLoad.bind(this)
+
+    this.state = {
+      classNames: ['default-img']
+    }
+  }
+
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
+  onLoad () {
+
+    this.setState({
+      classNames: []
+    })
+  }
+
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
+  onError () {
+
+    this.setState({
+      classNames: ['default-img']
+    })
+  }
+
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
+  render () {
+
+    const classNames = [
+      ...this.state.classNames,
+      ...this.props.className.split(' ')
+    ]
+
+    return(
+      <img className={classNames.join(' ')}
+        onError={this.onError}
+        onLoad={this.onLoad}
+        src={this.props.src}
+      />
+    )
+  }
+}

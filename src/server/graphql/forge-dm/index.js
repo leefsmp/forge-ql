@@ -3,8 +3,6 @@ import {graphqlExpress} from 'graphql-server-express'
 import {makeExecutableSchema} from 'graphql-tools'
 import typeDefs from './typeDefs'
 
-import hubsRes from './hubs'
-
 ///////////////////////////////////////////////////////////
 //
 //
@@ -83,6 +81,24 @@ const api = () => {
           return onError(ex)
         }
       },
+      project: async (root, {hubId, projectId}, {session}) => {
+
+        try {
+
+          const token = 
+            await forgeSvc.get3LeggedTokenMaster(
+              session)
+
+          const res = await dmSvc.getProject(
+            token, hubId, projectId)
+
+          return onResponse (res)
+
+        } catch (ex) {
+
+          return onError(ex)
+        }
+      },
       projects: async (root, {hubId}, {session}) => {
 
         try {
@@ -135,7 +151,25 @@ const api = () => {
 
           return onError(ex)
         }
-      }
+      },
+      folder: async (root, {projectId, folderId}, {session}) => {
+
+        try {
+
+          const token = 
+            await forgeSvc.get3LeggedTokenMaster(
+              session)
+
+          const res = await await dmSvc.getFolder(
+            token, projectId, folderId)
+
+          return onResponse (res)
+
+        } catch (ex) {
+
+          return onError(ex)
+        }
+      },
     }
   }
 

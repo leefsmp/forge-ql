@@ -16,6 +16,7 @@ class Project extends React.Component {
     return (
       <div className="folder" key={folder.id}> 
         <Link to={`/folder?projectId=${projectId}&folderId=${folder.id}`}>
+          <span className="fa fa-folder-o"/>
           { folder.attributes.name }
         </Link>
       </div>  
@@ -58,11 +59,11 @@ class Project extends React.Component {
 
 const withTopFolders = graphql(topFoldersQuery, {
   name: 'topFoldersQuery',
-  options: props => {
+  options: ({hubId, projectId}) => {
     return {
       variables: {
-        projectId: props.projectId,
-        hubId: props.hubId
+        projectId,
+        hubId
       }
     }
   }
@@ -70,11 +71,11 @@ const withTopFolders = graphql(topFoldersQuery, {
 
 const withProject = graphql(projectQuery, {
   name: 'projectQuery',
-  options: props => {
+  options: ({hubId, projectId}) => {
     return {
       variables: {
-        projectId: props.projectId,
-        hubId: props.hubId
+        projectId,
+        hubId
       }
     }
   }

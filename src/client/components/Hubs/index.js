@@ -37,7 +37,8 @@ class Hubs extends React.Component {
     return (
       <div className="hub" key={hub.id}> 
         <Link to={`/hub?hubId=${hub.id}`}>
-        { this.displayHubName(hub.attributes) }
+          <span className="fa fa-folder-o"/>
+          { this.displayHubName(hub.attributes) }
         </Link>
       </div>  
     )

@@ -248,7 +248,7 @@ module.exports = function () {
   // Get design thumbnail
   //
   /////////////////////////////////////////////////////////
-  router.get('/thumbnails/:urn', async (req, res) => {
+  router.get('/thumbnail/:urn', async (req, res) => {
 
     try {
 

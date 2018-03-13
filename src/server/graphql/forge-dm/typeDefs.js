@@ -47,6 +47,7 @@ const typeDefs = [`
 
     type Attributes {
       extension: Extension
+      displayName: String
       name: String
     }
 

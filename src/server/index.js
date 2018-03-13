@@ -16,6 +16,7 @@ import path from 'path'
 import cors from 'cors'
 
 //Endpoints
+import Derivatives3LeggedAPI from './endpoints/derivatives3Legged'
 import ForgeAPI from './endpoints/forge'
 import DMAPI from './endpoints/dm'
 
@@ -96,8 +97,9 @@ ServiceManager.registerService(dmSvc)
 ///////////////////////////////////////////////////////////
 const setupAPI = (db) => {
 
-  app.use('/api/forge',     ForgeAPI(config.forge))
-  app.use('/api/dm',        DMAPI())
+  app.use('/api/derivatives3Legged', Derivatives3LeggedAPI())
+  app.use('/api/forge', ForgeAPI(config.forge))
+  app.use('/api/dm', DMAPI())
 
   app.use('/api/graphiql', graphiqlExpress({
     endpointURL: '/api/graphql'

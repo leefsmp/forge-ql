@@ -1,11 +1,10 @@
-query FolderContent ($projectId: String!, $folderId: String!) {
-  folderContent (projectId: $projectId, folderId: $folderId) {
+query Folder ($projectId: String!, $folderId: String!) {
+  folder (projectId: $projectId, folderId: $folderId) {
     data {
       attributes {
         extension {
           type
         }
-        displayName
         name
       }
       id

@@ -16,7 +16,8 @@ class Hub extends React.Component {
     return (
       <div className="project" key={project.id}> 
         <Link to={`/project?hubId=${hubId}&projectId=${project.id}`}>
-        { project.attributes.name }
+          <span className="fa fa-folder-o"/>
+          { project.attributes.name }
         </Link>
       </div>  
     )
@@ -58,10 +59,10 @@ class Hub extends React.Component {
 
 const witProjects = graphql(projectsQuery, {
   name: 'projectsQuery',
-  options: props => {
+  options: ({hubId}) => {
     return {
       variables: {
-        hubId: props.hubId
+        hubId
       }
     }
   }
@@ -69,10 +70,10 @@ const witProjects = graphql(projectsQuery, {
 
 const withHub = graphql(hubQuery, {
   name: 'hubQuery',
-  options: props => {
+  options: ({hubId}) => {
     return {
       variables: {
-        hubId: props.hubId
+        hubId
       }
     }
   }

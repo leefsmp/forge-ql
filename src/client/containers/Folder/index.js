@@ -6,7 +6,7 @@ import React from 'react'
 const FolderView = (props) => {
   const query = qs.parse(props.location.search)
   return (
-    <Hub projectId={query.projectId} folderId={query.folderId}/> 
+    <Folder projectId={query.projectId} folderId={query.folderId}/> 
   ) 
 }
 

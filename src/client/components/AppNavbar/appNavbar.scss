@@ -9,6 +9,16 @@
 
     .container {
         width: 100%;
+
+        .navbar-toggle {
+          margin-top: 16px;
+        }
+
+        @media (min-width: 768px) {
+        .navbar-right {
+            margin-right: -60px;
+        }
+      }
     }
   }
 

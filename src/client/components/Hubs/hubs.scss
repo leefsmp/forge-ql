@@ -19,14 +19,21 @@
       margin: 0 0 8px 0;
       
       a {
+        padding: 0 0 12px 16px;
         color: #337ab7;
         display: block;
-        padding: 16px;
         
         &:hover{
           text-decoration: none;
           background: #bfdefa;
           color: #337ab7;
+        }
+
+        span {
+          position: relative;
+          margin: 0 16px 0 0;
+          font-size: 34px;
+          top: 6px;
         }
       }
     }

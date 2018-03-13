@@ -1,62 +1,35 @@
-import folderContentQuery from './folderContentQuery.graphql'
-import folderQuery from './folderQuery.graphql'
+import itemVersionsQuery from './itemVersionsQuery.graphql'
 import { graphql, compose } from 'react-apollo'
 import { Link } from 'react-router-dom'
+import {client as config} from 'c0nfig'
+import Image from 'Image'
 import React from 'react'
-import './folder.scss'
+import './item.scss'
 
-class Folder extends React.Component {
-
-  /////////////////////////////////////////////////////////
-  //
-  //
-  /////////////////////////////////////////////////////////
-  renderFolder (projectId, folder) {
-
-    return (
-      <div className="folder" key={folder.id}> 
-        <Link to={`/folder?projectId=${projectId}&folderId=${folder.id}`}>
-          <span className="fa fa-folder-o"/>
-          { folder.attributes.name }
-        </Link>
-      </div>  
-    )
-  }
+class Item extends React.Component {
 
   /////////////////////////////////////////////////////////
   //
   //
   /////////////////////////////////////////////////////////
-  renderItem (projectId, item) {
+  getVersionURN (version, useStorage = false) {
 
-    const urn = ''
+    if (!useStorage) {
 
-    return (
-      <div className="item" key={item.id}> 
-        <Link to={`/viewer?urn=${urn}`}>
-          <img src="/resources/img/logos/forge.png"/>
-          { item.attributes.displayName }
-        </Link>
-      </div>  
-    )
-  }
-
-  /////////////////////////////////////////////////////////
-  //
-  //
-  /////////////////////////////////////////////////////////
-  renderFolderOrItem (projectId, folderOrItem) {
-    
-    switch (folderOrItem.attributes.extension.type) {
-
-      case 'folders:autodesk.core:Folder':
-        return this.renderFolder(
-          projectId, folderOrItem)
-
-      case 'items:autodesk.core:File' :
-        return this.renderItem(
-          projectId, folderOrItem) 
+      if (version.relationships.derivatives) {
+        return version.relationships.derivatives.data.id
+      }
     }
+
+    if (version.relationships.storage) {
+
+      const urn = window.btoa(
+        version.relationships.storage.data.id)
+
+      return urn.replace(new RegExp('=', 'g'), '')
+    }
+
+    return null
   }
 
   /////////////////////////////////////////////////////////
@@ -65,60 +38,44 @@ class Folder extends React.Component {
   /////////////////////////////////////////////////////////
   render() {
     
+    const item = this.props.item
+
+    const versions = this.props.itemVersionsQuery.itemVersions
+      ? this.props.itemVersionsQuery.itemVersions.data
+      : null
+
+    const urn = versions
+      ? this.getVersionURN(versions[0])
+      : null
+
+    const src = urn 
+      ? `${config.apiUrl}/derivatives3Legged/thumbnail/${urn}`
+      : null
+
     return (
-      <div className="folder-details">
-        <div className="title">
-          Folder: {
-            (this.props.folderQuery.folder)
-              ? this.props.folderQuery.folder.data.attributes.name
-              : 'loading ...'
-          }
-        </div>
-        <div className="content">
-          {
-            this.props.folderContentQuery.loading && 
-            <div>
-              Loading Folder Content ...
-            </div>
-          }  
-          {
-            this.props.folderContentQuery.folderContent && 
-            this.props.folderContentQuery.folderContent.data.map(folderOrItem => (
-              this.renderFolderOrItem (this.props.projectId, folderOrItem)
-            ))
-          }  
-        </div>
-      </div>
+      <div className="item"> 
+        <Link to={`/viewer?urn=${urn}`}>
+          <Image src={src}/>
+          { item.attributes.displayName }
+        </Link>
+      </div>  
     )
   }
 }
 
-const withFolderContent = graphql(folderContentQuery, {
-  name: 'folderContentQuery',
-  options: props => {
+const withItemVersions = graphql(itemVersionsQuery, {
+  name: 'itemVersionsQuery',
+  options: ({projectId, item}) => {
     return {
       variables: {
-        projectId: props.projectId,
-        folderId: props.folderId
-      }
-    }
-  }
-})
-
-const withFolder = graphql(folderQuery, {
-  name: 'folderQuery',
-  options: props => {
-    return {
-      variables: {
-        projectId: props.projectId,
-        folderId: props.folderId
+        itemId: item.id,
+        projectId
       }
     }
   }
 })
 
 export default compose(
-  withFolderContent,
-  withFolder,
-) (Folder)
+  withItemVersions
+) (Item)
 

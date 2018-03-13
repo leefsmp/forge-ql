@@ -3,6 +3,7 @@ import folderQuery from './folderQuery.graphql'
 import { graphql, compose } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import React from 'react'
+import Item from 'Item'
 import './folder.scss'
 
 class Folder extends React.Component {
@@ -29,15 +30,8 @@ class Folder extends React.Component {
   /////////////////////////////////////////////////////////
   renderItem (projectId, item) {
 
-    const urn = ''
-
     return (
-      <div className="item" key={item.id}> 
-        <Link to={`/viewer?urn=${urn}`}>
-          <img src="/resources/img/logos/forge.png"/>
-          { item.attributes.displayName }
-        </Link>
-      </div>  
+      <Item projectId={projectId} item={item} key={item.id}/>  
     )
   }
 

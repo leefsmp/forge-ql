@@ -170,6 +170,24 @@ const api = () => {
           return onError(ex)
         }
       },
+      itemVersions: async (root, {projectId, itemId}, {session}) => {
+
+        try {
+
+          const token = 
+            await forgeSvc.get3LeggedTokenMaster(
+              session)
+
+          const res = await await dmSvc.getItemVersions(
+            token, projectId, itemId)
+
+          return onResponse (res)
+
+        } catch (ex) {
+
+          return onError(ex)
+        }
+      }
     }
   }
 

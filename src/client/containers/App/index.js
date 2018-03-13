@@ -10,6 +10,7 @@ import './app.scss'
 // routes
 import Project from 'containers/Project'
 import Folder from 'containers/Folder'
+import Viewer from 'containers/Viewer'
 import Home from 'containers/Home'
 import Blog from 'containers/Blog'
 import Hubs from 'containers/Hubs'
@@ -59,6 +60,7 @@ class App extends React.Component {
         <main>
           <Route exact path="/project" component={Project}/>
           <Route exact path="/folder" component={Folder}/>
+          <Route exact path="/viewer" component={Viewer}/>
           <Route exact path="/blog" component={Blog}/>
           <Route exact path="/hubs" component={Hubs}/>
           <Route exact path="/hub" component={Hub}/>

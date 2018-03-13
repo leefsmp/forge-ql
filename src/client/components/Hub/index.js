@@ -11,11 +11,11 @@ class Hub extends React.Component {
   //
   //
   /////////////////////////////////////////////////////////
-  renderProject (project) {
+  renderProject (hubId, project) {
     
     return (
       <div className="project" key={project.id}> 
-        <Link to={`/project?projectId=${project.id}`}>
+        <Link to={`/project?hubId=${hubId}&projectId=${project.id}`}>
         { project.attributes.name }
         </Link>
       </div>  
@@ -47,7 +47,7 @@ class Hub extends React.Component {
           {
             this.props.projectsQuery.projects && 
             this.props.projectsQuery.projects.data.map(project => (
-              this.renderProject (project)
+              this.renderProject (this.props.hubId, project)
             ))
           }  
         </div>

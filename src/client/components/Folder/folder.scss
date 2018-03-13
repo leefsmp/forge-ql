@@ -1,4 +1,4 @@
-.hub-details {
+.folder-details {
   padding: 20px;
   height: 100%;
 
@@ -13,7 +13,25 @@
     background: #d8d8d8;
     overflow: scroll;
     
-    .project {
+    .folder {
+      border: 1px solid #b5b5b5;
+      background: whitesmoke;
+      margin: 0 0 8px 0;
+      
+      a {
+        color: #337ab7;
+        display: block;
+        padding: 16px;
+        
+        &:hover{
+          text-decoration: none;
+          background: #bfdefa;
+          color: #337ab7;
+        }
+      }
+    }
+
+    .item {
       border: 1px solid #b5b5b5;
       background: whitesmoke;
       margin: 0 0 8px 0;

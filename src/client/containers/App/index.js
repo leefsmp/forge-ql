@@ -8,6 +8,8 @@ import React from 'react'
 import './app.scss'
 
 // routes
+import Project from 'containers/Project'
+import Folder from 'containers/Folder'
 import Home from 'containers/Home'
 import Blog from 'containers/Blog'
 import Hubs from 'containers/Hubs'
@@ -54,6 +56,8 @@ class App extends React.Component {
       <div className="app">
        <AppNavbar user={this.props.user} onLogin={this.onLogin}/>
         <main>
+          <Route exact path="/project" component={Project}/>
+          <Route exact path="/folder" component={Folder}/>
           <Route exact path="/blog" component={Blog}/>
           <Route exact path="/hubs" component={Hubs}/>
           <Route exact path="/hub" component={Hub}/>

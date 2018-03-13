@@ -1,0 +1,16 @@
+query Folder ($projectId: String!, $folderId: String!) {
+  folder (projectId: $projectId, folderId: $folderId) {
+    data {
+      attributes {
+        extension {
+          type
+        }
+        name
+      }
+      id
+    }
+    error {
+      message
+    }
+  }
+}

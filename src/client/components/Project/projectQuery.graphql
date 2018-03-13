@@ -1,0 +1,16 @@
+query Project ($hubId: String!, $projectId: String!) {
+  project (hubId: $hubId, projectId: $projectId) {
+    data {
+      attributes {
+        extension {
+          type
+        }
+        name
+      }
+      id
+    }
+    error {
+      message
+    }
+  }
+}

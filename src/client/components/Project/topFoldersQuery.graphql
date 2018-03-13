@@ -1,0 +1,16 @@
+query TopFolders ($hubId: String!, $projectId: String!) {
+  topFolders (hubId: $hubId, projectId: $projectId) {
+    data {
+      attributes {
+        extension {
+          type
+        }
+        name
+      }
+      id
+    }
+    error {
+      message
+    }
+  }
+}

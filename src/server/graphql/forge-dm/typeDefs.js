@@ -3,6 +3,8 @@ const typeDefs = [`
     type Query {
       folderContent (projectId: String!, folderId: String!): FolderContentResponse
       topFolders (hubId: String!, projectId: String!): FolderContentResponse
+      project (hubId: String!, projectId: String!): ProjectResponse
+      folder (projectId: String!, folderId: String!): FolderResponse
       projects (hubId: String!): ProjectsResponse
       hub (hubId: String!): HubResponse
       hubs: HubsResponse
@@ -15,6 +17,16 @@ const typeDefs = [`
 
     type ProjectsResponse {
       data: [Project]
+      error: Error
+    }
+
+    type ProjectResponse {
+      data: Project
+      error: Error
+    }
+
+    type FolderResponse {
+      data: Folder
       error: Error
     }
 

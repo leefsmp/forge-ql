@@ -84,7 +84,7 @@ export default api
 
 // creates comment
 // mutation {
-//   createComment(postId: "5a9fee4dde5633b67a3621a5", content: "I like the way you say hello world.") {
+//   createComment(postId: "5aa861ab70498b9d79362837", content: "I like the way you say hello world.") {
 //     _id
 //     postId
 //     content

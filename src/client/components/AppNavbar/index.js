@@ -96,14 +96,17 @@ class AppNavbar extends React.Component {
                 &nbsp; About ...
               </label>
             </NavItem>
-            <NavItem eventKey={2.3} href={`${config.apiUrl}/graphiql`} target="_blank">
-              <label className="nav-label" style={{width: "100%", height: "20px", float: "left"}}>
-                &nbsp; GraphQL
-              </label>
-              <label className="nav-label" style={{left: "20px", top: "-6px"}}>
-                &nbsp; IDE
-              </label>
-            </NavItem>
+            {
+              (config.env === 'development') &&
+              <NavItem eventKey={2.3} href={`${config.apiUrl}/graphiql`} target="_blank">
+                <label className="nav-label" style={{width: "100%", height: "20px", float: "left"}}>
+                  &nbsp; GraphQL
+                </label>
+                <label className="nav-label" style={{left: "20px", top: "-6px"}}>
+                  &nbsp; IDE
+                </label>
+              </NavItem>
+            }
           </Nav>
         </Navbar.Collapse>
       </Navbar>

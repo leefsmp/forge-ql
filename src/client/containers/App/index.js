@@ -66,6 +66,7 @@ class App extends React.Component {
           <Route exact path="/hub" component={Hub}/>
           <Route exact path="/" component={Home}/>
         </main>
+        <div className="background"/>
       </div>
     )
   }

@@ -3,7 +3,7 @@
 // PRODUCTION configuration
 //
 /////////////////////////////////////////////////////////////////////
-const HOST_URL = 'https://forge-rcdb.autodesk.io'
+const HOST_URL = 'https://forge-ql.autodesk.io'
 const PORT = 443
 
 const config = {

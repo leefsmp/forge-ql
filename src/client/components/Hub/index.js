@@ -42,7 +42,7 @@ class Hub extends React.Component {
           {
             this.props.projectsQuery.loading && 
             <div>
-              Loading hub ...
+              Loading projects ...
             </div>
           }  
           {

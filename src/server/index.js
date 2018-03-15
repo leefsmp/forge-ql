@@ -101,10 +101,13 @@ const setupAPI = (db) => {
   app.use('/api/forge', ForgeAPI(config.forge))
   app.use('/api/dm', DMAPI())
 
-  app.use('/api/graphiql', graphiqlExpress({
-    endpointURL: '/api/graphql'
-  })) 
+  if (config.env === 'development') {
 
+    app.use('/api/graphiql', graphiqlExpress({
+      endpointURL: '/api/graphql'
+    })) 
+  }
+  
   app.use('/api/graphql', graphQLAPI({db}))
 }
 

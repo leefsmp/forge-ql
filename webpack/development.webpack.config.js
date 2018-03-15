@@ -110,7 +110,7 @@ module.exports = {
         __dirname,
         `../src/client/layouts/${config.layouts.index}`),
 
-      title: 'Forge | RCDB | DEV',
+      title: 'Forge | QL | DEV',
       filename: 'index.html',
       minify: false,
       inject: 'body'

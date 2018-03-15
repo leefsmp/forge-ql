@@ -167,7 +167,7 @@ module.exports = {
         __dirname,
         `../src/client/layouts/${config.layouts.index}`),
 
-      title: 'Forge | RCDB',
+      title: 'Forge | QL',
       filename: 'index.html',
       minify: {
         removeStyleLinkTypeAttributes: true,
@@ -215,19 +215,11 @@ module.exports = {
 
   resolve: {
     modules: [
-      path.resolve('./src/client/viewer.components/Viewer.Extensions.Dynamic'),
-      path.resolve('./src/client/viewer.components/Viewer.Extensions'),
-      path.resolve('./src/client/viewer.components/Viewer.Commands'),
-      path.resolve('./src/client/viewer.components'),
-
-      path.resolve('./src/client/components/UIComponents'),
       path.resolve('./src/client/components'),
-      path.resolve('./src/client/services'),
-      path.resolve('./src/client/styles'),
       path.resolve('./node_modules'),
       path.resolve('./src/client')
     ],
-    extensions : ['.js', '.jsx', '.json']
+    extensions : ['.js', '.jsx', '.json', '.grapql']
   },
 
   resolveLoader: {
@@ -237,7 +229,6 @@ module.exports = {
   module: {
 
     rules: [
-
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -252,7 +243,11 @@ module.exports = {
           }
         }]
       },
-
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader',
+      },
       {
         test: /\.css$/,
         use: [{

@@ -8,6 +8,20 @@ body {
 
     main {
       height: calc(100% - 65px);
+      position: absolute;
+      opacity: 1.0;
+      z-index: 10;
+      width: 100%;
     }
+  }
+
+  .background {
+    background-position: center center;
+    background: url('/resources/img/forge.jpg');
+    height: calc(100% - 65px);
+    background-size: cover;
+    position: absolute;
+    opacity: 0.5;
+    width: 100%;
   }
 }

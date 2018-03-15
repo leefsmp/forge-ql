@@ -20,10 +20,10 @@ const api = ({db}) => {
     context: { 
       session: req.session 
     },
-    validationRules: [  
-      depthLimit(10),
-      costAnalyzer
-    ]
+    // validationRules: [  
+    //   depthLimit(10),
+    //   costAnalyzer
+    // ]
   }))
 }
 

@@ -108,7 +108,9 @@ const setupAPI = (db) => {
     })) 
   }
   
-  app.use('/api/graphql', graphQLAPI({db}))
+  app.use('/api/graphql', graphQLAPI({
+    db: db
+  }))
 }
 
 ///////////////////////////////////////////////////////////
@@ -136,7 +138,7 @@ const setupLMVProxy = () => {
 /////////////////////////////////////////////////////////////////////
 const setupStatic = () => {
 
-  if (process.env.HOT_RELOADING) {
+  if (config.HOT_RELOADING) {
 
     // dynamically require webpack dependencies
     // to keep them in devDependencies (package.json)
@@ -178,24 +180,39 @@ const setupStatic = () => {
 //
 //
 ///////////////////////////////////////////////////////////
+const setupRoutesAndAPI = (db) => {
+
+  setupAPI (db)
+
+  setupLMVProxy()
+
+  // This rewrites all routes requests to the root /index.html file
+  // (ignoring file requests). If you want to implement universal
+  // rendering, you'll want to remove this middleware
+  app.use(require('connect-history-api-fallback')())
+
+  setupStatic()
+}
+
+///////////////////////////////////////////////////////////
+//
+//
+///////////////////////////////////////////////////////////
 const run = async () => {
 
   try {
 
-    const {HOST_URL, MONGO_URL, PORT} = process.env
+    const {HOST_URL, MONGO_URL, PORT} = config
   
-    const db = await MongoClient.connect(MONGO_URL)
+    MongoClient.connect(MONGO_URL).then((db) => {
 
-    setupAPI(db)
-
-    setupLMVProxy()
-
-    // This rewrites all routes requests to the root /index.html file
-    // (ignoring file requests). If you want to implement universal
-    // rendering, you'll want to remove this middleware
-    app.use(require('connect-history-api-fallback')())
-
-    setupStatic()
+      setupRoutesAndAPI(db)
+    
+    }, () => {
+    
+      setupRoutesAndAPI()
+    
+    })
 
     app.listen(PORT, () => {
       console.log(`Server running on ${HOST_URL}:${PORT}`)

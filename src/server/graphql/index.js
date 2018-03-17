@@ -11,19 +11,24 @@ const api = ({db}) => {
     maximumCost: 1000
   })
 
-  const schema = mergeSchemas({
-    schemas: [dmAPI(), blogAPI(db)]
-  })
-  
+  const schemas = [
+    dmAPI()
+  ]
+
+  if (db) {
+
+    schemas.push(blogAPI(db))
+  }
+
   return graphqlExpress((req, res, graphQLParams) => ({
-    schema,
+    schema: mergeSchemas({ schemas }),
     context: { 
       session: req.session 
     },
-    // validationRules: [  
-    //   depthLimit(10),
-    //   costAnalyzer
-    // ]
+    validationRules: [  
+      depthLimit(10),
+      //costAnalyzer
+    ]
   }))
 }
 

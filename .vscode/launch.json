@@ -10,10 +10,7 @@
           "name": "BLD | DEV + HRM",
           "program": "${workspaceRoot}/bin/start.js",
           "env": {
-              "MONGO_URL": "mongodb://localhost:27017/forge-ql",
-              "HOST_URL": "http://localhost",
               "NODE_ENV":"development",
-              "HOT_RELOADING":"true",
               "PORT": "3000"
           }
       },
@@ -23,8 +20,6 @@
           "name": "BLD | DEV",
           "program": "${workspaceRoot}/webpack/index.js",
           "env": {
-            "MONGO_URL": "mongodb://localhost:27017/forge-ql",
-            "HOST_URL": "http://localhost",
             "NODE_ENV":"development",
             "PORT": "3000"
           }

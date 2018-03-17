@@ -2,15 +2,41 @@
   padding: 20px;
   height: 100%;
 
-  .posts-list {
-    height: calc(100% - 66px);
-    background: whitesmoke;
+  .title {
+    padding: 0 0 8px 0;
+    font-size: 24px;
+  }
+
+  .content {
+    height: calc(100% - 46px);
+    padding: 8px 8px 0 8px;
+    background: #d8d8d8;
     overflow: scroll;
+    opacity: 0.85;
     
     .post {
       border: 1px solid #b5b5b5;
-      margin: 0 0 10px 0;
-      padding: 16px;
+      background: whitesmoke;
+      margin: 0 0 8px 0;
+      
+      a {
+        padding: 0 0 12px 16px;
+        color: #337ab7;
+        display: block;
+        
+        &:hover{
+          text-decoration: none;
+          background: #bfdefa;
+          color: #337ab7;
+        }
+
+        span {
+          position: relative;
+          margin: 0 16px 0 0;
+          font-size: 34px;
+          top: 6px;
+        }
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 import {makeExecutableSchema} from 'graphql-tools'
 import typeDefs from './typeDefs'
+import {ObjectId} from 'mongodb'
 
 const api = (db) => {
 
@@ -7,51 +8,58 @@ const api = (db) => {
 
   const Posts = db.collection('posts')
 
-  const prepare = (object) => {
+  const stringifyObjectId = (obj) => {
     return {
-      ...object,
-      _id: object._id.toString()
+      ...obj,
+      _id: obj._id.toString()
     }
   }
 
   const resolvers = {
     Query: {
       post: async (root, {_id}) => {
-        return prepare(await Posts.findOne(ObjectId(_id)))
+        return stringifyObjectId(
+          await Posts.findOne(ObjectId(_id)))
       },
       posts: async (root, args, context) => {
-        return (await Posts.find({}).toArray()).map(prepare)
+        const posts = await Posts.find({}).toArray()
+        return posts.map(stringifyObjectId)
       },
       comment: async (root, {_id}) => {
-        return prepare(await Comments.findOne(ObjectId(_id)))
+        return stringifyObjectId(
+          await Comments.findOne(ObjectId(_id)))
       },
+      comments: async (root, {postId}) => {
+        return (await Comments.find({
+          postId
+        }).toArray()).map(stringifyObjectId)
+      }
     },
     Post: {
       comments: async ({_id}) => {
         return (await Comments.find({
           postId: _id
-        }).toArray()).map(prepare)
+        }).toArray()).map(stringifyObjectId)
       }
     },
     Comment: {
       post: async ({postId}) => {
-        return prepare(await Posts.findOne(ObjectId(postId)))
+        return stringifyObjectId(
+          await Posts.findOne(ObjectId(postId)))
       }
     },
     Mutation: {
       createPost: async (root, args, context, info) => {
         const res = await Posts.insert(args)
-        const postId = res.insertedIds[0]
-        return prepare(await Posts.findOne({
-          _id: postId
+        return stringifyObjectId(await Posts.findOne({
+          _id: res.insertedIds[0]
         }))
       },
       createComment: async (root, args) => {
         const res = await Comments.insert(args)
-        const commentId = res.insertedIds[0]
-        return prepare(await Comments.findOne({
-            _id: commentId
-          }))
+        return stringifyObjectId(await Comments.findOne({
+          _id: res.insertedIds[0]
+        }))
       }
     }
   }
@@ -66,7 +74,7 @@ export default api
 
 // adds a post 
 // mutation {
-//   createPost(title:"hello", content:"world") {
+//   createPost(title:"Appolo & GraphQL", content:"Sweet!") {
 //     _id
 //     title
 //     content
@@ -84,7 +92,7 @@ export default api
 
 // creates comment
 // mutation {
-//   createComment(postId: "5aa861ab70498b9d79362837", content: "I like the way you say hello world.") {
+//   createComment(postId: "5aa861ab70498b9d79362837", content: "Cool article!") {
 //     _id
 //     postId
 //     content

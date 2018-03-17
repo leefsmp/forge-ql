@@ -1,8 +1,9 @@
 const typeDefs = [`
 
     type Query {
-      comment(_id: String): Comment
-      post(_id: String): Post
+      comments(postId: String!): [Comment]
+      comment(_id: String!): Comment
+      post(_id: String!): Post
       posts: [Post]
     }
 

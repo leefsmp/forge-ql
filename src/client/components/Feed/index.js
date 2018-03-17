@@ -1,11 +1,16 @@
 import { withRouter } from 'react-router-dom'
 import feedQuery from './feedQuery.graphql'
+import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import React from 'react'
 import './feed.scss'
 
 class Feed extends React.Component {
 
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
   componentWillReceiveProps(nextProps) {
     const {location} = this.props
     if (location.key !== nextProps.location.key) {
@@ -13,16 +18,34 @@ class Feed extends React.Component {
     }
   }
 
-  render() {
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
+  renderPost (post) {
+    
+    return (
+      <div className="post" key={post._id}> 
+        <Link to={`/post?postId=${post._id}`}>
+          <span className="fa fa-folder-o"/>
+          { post.title }
+        </Link>
+      </div>  
+    )
+  }
 
-    console.log(this.props)
+  /////////////////////////////////////////////////////////
+  //
+  //
+  /////////////////////////////////////////////////////////
+  render() {
 
     return (
       <div className="feed">
-        <h2>
+        <div className="title">
           Posts Feed
-        </h2>
-        <div className="posts-list">
+        </div>
+        <div className="content">
         {
           this.props.feedQuery.loading && 
           <div>
@@ -32,9 +55,7 @@ class Feed extends React.Component {
         {
           this.props.feedQuery.posts &&
           this.props.feedQuery.posts.map(post => (
-            <div className="post" key={post._id}> 
-              { post.title }
-            </div>  
+            this.renderPost (post)
           ))
         }
         </div> 
@@ -42,14 +63,6 @@ class Feed extends React.Component {
     )
   }
 }
-
-// <Post
-//  key={post.id}
-// post={post}
-//  refresh={() => this.props.feedQuery.refetch()}
-//  isDraft={!post.isPublished}
-///>
-
 
 export default graphql(feedQuery, {
   // name of the injected prop: this.props.feedQuery...

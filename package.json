@@ -1,13 +1,13 @@
 {
   "name": "forge-ql",
   "version": "1.0.0",
-  "description": "Autodesk Forge API GraphQL Wrapper",
+  "description": "A GraphQL wrapper server/client demo around Autodesk Forge Web API's",
   "engines": {
     "node": ">=5.0.0",
     "npm": "^3.0.0"
   },
   "scripts": {
-    "build-server": "babel --presets env,stage-0 --plugins transform-decorators-legacy ./src/server -d ./bin/static",
+    "build-server": "cross-env NODE_ENV=production babel --presets env,stage-0 --plugins transform-decorators-legacy ./src/server -d ./bin/static",
     "build-prod": "cross-env NODE_ENV=production npm run build",
     "start": "node bin/start.js",
     "build": "node webpack",
@@ -21,7 +21,8 @@
     "forge",
     "reactjs",
     "node.js",
-    "express"
+    "express",
+    "graphql"
   ],
   "repository": {
     "type": "git",

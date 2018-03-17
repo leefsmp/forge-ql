@@ -91,7 +91,9 @@ class AppNavbar extends React.Component {
                 &nbsp; { user ? username : 'Login'}
               </label>
             </NavItem>
-            <NavItem eventKey={2.2} onClick={this.onAbout}>
+            <NavItem href="https://github.com/leefsmp/forge-ql"
+              target="_blank"
+              eventKey={2.2}>
               <label className="nav-label">
                 &nbsp; About ...
               </label>

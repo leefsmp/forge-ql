@@ -3,12 +3,18 @@
 // DEVELOPMENT configuration
 //
 /////////////////////////////////////////////////////////////////////
-const HOST_URL = 'http://localhost'
-const PORT = 3000
+const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/forge-ql"
+const HOST_URL = process.env.HOST_URL || 'http://localhost'
+const PORT = process.env.PORT || 3000
 
 const config = {
 
   env: 'development',
+
+  HOT_RELOADING: true,
+  MONGO_URL,
+  HOST_URL,
+  PORT,
 
   client: {
     apiUrl: `${HOST_URL}:${PORT}/api`,

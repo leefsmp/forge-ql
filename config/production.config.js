@@ -3,12 +3,17 @@
 // PRODUCTION configuration
 //
 /////////////////////////////////////////////////////////////////////
-const HOST_URL = 'https://forge-ql.autodesk.io'
-const PORT = 443
+const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/forge-ql"
+const HOST_URL = process.env.HOST_URL || 'https://forge-ql.autodesk.io'
+const PORT = process.env.PORT ||443
 
 const config = {
 
   env: 'production',
+  
+  MONGO_URL,
+  HOST_URL,
+  PORT,
 
   client: {
     apiUrl: `${HOST_URL}:${PORT}/api`,

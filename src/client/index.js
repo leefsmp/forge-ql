@@ -15,9 +15,6 @@ import {
   BrowserRouter as Router
 } from 'react-router-dom'
 
-//Redux Store
-//import store from 'redux/store' 
-
 // Apollo Resolvers
 import appResolver from 'resolvers/app'
 

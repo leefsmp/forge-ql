@@ -1,4 +1,5 @@
 import Viewer from 'Viewer'
+import Loader from 'Loader'
 import React from 'react'
 import './viewer.css'
 
@@ -20,7 +21,8 @@ class ViewerView extends React.Component {
     this.onWindowResize = this.onWindowResize.bind(this)
 
     this.state = {
-      envInitialized: false
+      envInitialized: false,
+      showLoader: true
     }
   }
 
@@ -184,6 +186,10 @@ class ViewerView extends React.Component {
     ])
     
     this.onModelCompletedLoad (model)
+
+    this.setState(Object.assign({}, this.state, {
+      showLoader: false
+    }))
   }
 
   /////////////////////////////////////////////////////////
@@ -242,10 +248,11 @@ class ViewerView extends React.Component {
 
     return (
       <div className="viewer">
-      {
-        this.state.envInitialized &&
-        <Viewer onViewerCreated={this.onViewerCreated}/>
-      }
+        <Loader show={this.state.showLoader}/>
+        {
+          this.state.envInitialized &&
+          <Viewer onViewerCreated={this.onViewerCreated}/>
+        }
       </div>
     )
   }

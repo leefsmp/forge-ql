@@ -5,7 +5,7 @@ query TopFolders ($hubId: String!, $projectId: String!) {
         extension {
           type
         }
-        name
+        displayName
       }
       id
     }

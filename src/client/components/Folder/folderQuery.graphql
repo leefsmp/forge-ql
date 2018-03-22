@@ -5,7 +5,7 @@ query Folder ($projectId: String!, $folderId: String!) {
         extension {
           type
         }
-        name
+        displayName
       }
       id
     }

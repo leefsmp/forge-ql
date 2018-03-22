@@ -6,7 +6,6 @@ query FolderContent ($projectId: String!, $folderId: String!) {
           type
         }
         displayName
-        name
       }
       id
     }

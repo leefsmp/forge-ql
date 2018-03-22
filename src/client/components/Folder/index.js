@@ -18,7 +18,7 @@ class Folder extends React.Component {
       <div className="folder" key={folder.id}> 
         <Link to={`/folder?projectId=${projectId}&folderId=${folder.id}`}>
           <span className="fa fa-folder-o"/>
-          { folder.attributes.name }
+          { folder.attributes.displayName }
         </Link>
       </div>  
     )
@@ -64,7 +64,7 @@ class Folder extends React.Component {
         <div className="title">
           Folder: {
             (this.props.folderQuery.folder)
-              ? this.props.folderQuery.folder.data.attributes.name
+              ? this.props.folderQuery.folder.data.attributes.displayName
               : 'loading ...'
           }
         </div>

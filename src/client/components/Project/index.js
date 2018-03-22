@@ -17,7 +17,7 @@ class Project extends React.Component {
       <div className="folder" key={folder.id}> 
         <Link to={`/folder?projectId=${projectId}&folderId=${folder.id}`}>
           <span className="fa fa-folder-o"/>
-          { folder.attributes.name }
+          { folder.attributes.displayName }
         </Link>
       </div>  
     )
